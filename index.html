@@ -1,196 +1,856 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo Trend | Tienda en Línea</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neo Trend | Nueva Colección</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <style>
-        /* Importar una fuente limpia de Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-muted: #7a7670;
+      --accent: #c9a96e;
+      --accent-dark: #a07d45;
+      --border: #e8e4de;
+      --hero-bg: #1a1814;
+    }
 
-        /* Reseteo básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: #fafafa;
-            color: #111;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Cabecera */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: #fff;
-            border-bottom: 1px solid #eaeaea;
-        }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: -1px;
-        }
+    /* ── CURSOR personalizado ── */
+    body { cursor: none; }
+    #cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+      mix-blend-mode: multiply;
+    }
+    #cursor.grow {
+      width: 44px; height: 44px;
+      background: rgba(201,169,110,0.25);
+    }
 
-        .nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #555;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
+    /* ── ANNOUNCEMENT BAR ── */
+    .announcement {
+      background: var(--ink);
+      color: var(--accent);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
 
-        .nav a:hover {
-            color: #000;
-        }
+    /* ── HEADER ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 5%;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.92);
+    }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background-color: #fff;
-        }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            letter-spacing: -1.5px;
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
 
-        .hero p {
-            color: #666;
-            font-size: 18px;
-        }
+    .nav a {
+      text-decoration: none;
+      color: var(--ink-muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.25s;
+      position: relative;
+    }
 
-        /* Catálogo Grid */
-        .catalogo {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 50px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
 
-        /* Tarjeta de Producto */
-        .producto-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #eaeaea;
-        }
+    .nav a:hover { color: var(--ink); }
+    .nav a:hover::after { width: 100%; }
 
-        .producto-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
+    .nav-cta {
+      background: var(--ink) !important;
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-size: 11px !important;
+      letter-spacing: 0.15em !important;
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--accent-dark) !important; }
+    .nav-cta::after { display: none !important; }
 
-        .producto-card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
+    /* ── HERO ── */
+    .hero {
+      background: var(--hero-bg);
+      color: #f7f5f2;
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .producto-info {
-            padding: 20px;
-            text-align: center;
-        }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 8% 80px 8%;
+      position: relative;
+      z-index: 2;
+    }
 
-        .producto-titulo {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        .producto-precio {
-            font-size: 16px;
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 20px;
-        }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
 
-        /* Botón de Compra / WhatsApp */
-        .btn-comprar {
-            display: inline-block;
-            background-color: #111;
-            color: #fff;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
 
-        .btn-comprar:hover {
-            background-color: #333;
-        }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #fff;
-            border-top: 1px solid #eaeaea;
-            color: #888;
-            font-size: 14px;
-            margin-top: 40px;
-        }
-    </style>
+    .hero-desc {
+      font-size: 15px;
+      color: #9e9a94;
+      line-height: 1.7;
+      max-width: 360px;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--ink);
+      padding: 15px 32px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #9e9a94;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .btn-ghost:hover { color: #f7f5f2; }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      transition: transform 8s ease;
+    }
+
+    .hero:hover .hero-right img { transform: scale(1.04); }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--hero-bg) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    /* Número decorativo */
+    .hero-number {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      z-index: 0;
+      user-select: none;
+    }
+
+    /* ── SECCIÓN CATÁLOGO ── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 70px 5% 40px;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-title-group {}
+
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .section-count {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    /* ── GRID PRODUCTOS ── */
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      padding: 0 5% 80px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Layout editorial: primera card más grande */
+    .catalogo .producto-card:first-child {
+      grid-column: span 2;
+    }
+
+    .catalogo .producto-card:first-child .producto-imagen {
+      height: 560px;
+    }
+
+    /* ── PRODUCTO CARD ── */
+    .producto-card {
+      background: var(--surface);
+      overflow: hidden;
+      position: relative;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .producto-card:nth-child(2) { animation-delay: 0.1s; }
+    .producto-card:nth-child(3) { animation-delay: 0.2s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .producto-imagen {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .producto-card:hover .producto-imagen img {
+      transform: scale(1.06);
+    }
+
+    /* Badge */
+    .badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--ink);
+      color: var(--accent);
+      padding: 5px 12px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      z-index: 2;
+    }
+
+    /* Overlay con botón al hover */
+    .producto-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,24,20,0.45);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 30px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 3;
+    }
+
+    .producto-card:hover .producto-overlay {
+      opacity: 1;
+    }
+
+    .btn-overlay {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--ink);
+      padding: 13px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transform: translateY(10px);
+      transition: transform 0.35s ease 0.05s, background 0.25s;
+    }
+
+    .producto-card:hover .btn-overlay {
+      transform: translateY(0);
+    }
+
+    .btn-overlay:hover { background: #d4b07a; }
+
+    /* Wishlist icon */
+    .wishlist-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 4;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+      border: none;
+    }
+
+    .producto-card:hover .wishlist-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .wishlist-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--ink); stroke-width: 1.5; }
+    .wishlist-btn.liked svg { fill: #e05; stroke: #e05; }
+
+    /* Info producto */
+    .producto-info {
+      padding: 22px 24px 26px;
+      border-top: 1px solid var(--border);
+    }
+
+    .producto-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .producto-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    .producto-categoria {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    .producto-precio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .precio-original {
+      font-size: 14px;
+      color: var(--ink-muted);
+      text-decoration: line-through;
+      margin-right: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── BANNER MEDIO ── */
+    .banner-medio {
+      background: var(--ink);
+      color: #f7f5f2;
+      padding: 80px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin: 0 0 0 0;
+    }
+
+    .banner-medio h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .banner-medio h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .banner-medio p {
+      color: #9e9a94;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 400px;
+    }
+
+    .banner-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .feature {
+      border-top: 1px solid #2e2c28;
+      padding-top: 20px;
+    }
+
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .feature-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: #7a7670;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--ink);
+      color: #9e9a94;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #2e2c28;
+      margin-bottom: 30px;
+    }
+
+    .footer-brand .logo-footer {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f7f5f2;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      color: #f7f5f2;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #7a7670;
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-bottom a { color: var(--accent); text-decoration: none; }
+
+    /* WhatsApp float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 500;
+      background: #25d366;
+      color: #fff;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.55);
+    }
+
+    .whatsapp-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 350px; }
+      .hero-right::before { background: linear-gradient(to bottom, var(--hero-bg) 0%, transparent 40%); }
+      .catalogo .producto-card:first-child { grid-column: span 1; }
+      .catalogo .producto-card:first-child .producto-imagen { height: 400px; }
+      .banner-medio { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .header { padding: 18px 4%; }
+      .nav { gap: 20px; }
+      .nav-cta { display: none; }
+      .catalogo { grid-template-columns: 1fr; padding: 0 4% 60px; }
+      .section-header { padding: 50px 4% 30px; flex-direction: column; align-items: flex-start; gap: 10px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .banner-features { grid-template-columns: 1fr; }
+      body { cursor: auto; }
+      #cursor { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">NEO TREND</div>
-        <nav class="nav">
-            <a href="#catalogo">Catálogo</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </header>
+<!-- Cursor personalizado -->
+<div id="cursor"></div>
 
-    <section class="hero">
-        <h1>NEO TREND.</h1>
-        <p>Descubre nuestra nueva colección. Compra fácil y directo.</p>
-    </section>
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/50376719462" class="whatsapp-float" target="_blank" title="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
 
-    <main id="catalogo" class="catalogo">
-        
-        <article class="producto-card">
-            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80" alt="Camiseta Básica">
-            <div class="producto-info">
-                <h3 class="producto-titulo">Camiseta Essential</h3>
-                <p class="producto-precio">$15.00</p>
-                <a href="https://wa.me/50376719462" class="btn-comprar" target="_blank">
-                    Comprar ahora
-                </a>
-            </div>
-        </article>
+<!-- Barra de anuncio -->
+<div class="announcement">✦ Envío gratis en pedidos +$60 · Nueva colección disponible ✦</div>
 
-        <article class="producto-card">
-            <img src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?auto=format&fit=crop&w=500&q=80" alt="Zapatos Urbanos">
-            <div class="producto-info">
-                <h3 class="producto-titulo">Zapatos Urban</h3>
-                <p class="producto-precio">$45.00</p>
-                <a href="https://wa.me/50376719462" class="btn-comprar" target="_blank">
-                    Comprar ahora
-                </a>
-            </div>
-        </article>
+<!-- Header -->
+<header class="header">
+  <a href="#" class="logo">Neo Trend</a>
+  <nav class="nav">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="https://wa.me/50376719462" target="_blank" class="nav-cta">Contactar</a>
+  </nav>
+</header>
 
-    </main>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Colección 2026</div>
+    <h1>Estilo<br>que <em>define</em><br>tu mundo</h1>
+    <p class="hero-desc">Piezas seleccionadas para quienes entienden que la moda no sigue tendencias — las crea.</p>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn-primary">
+        Ver colección
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://wa.me/50376719462" class="btn-ghost" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Consultar talla
+      </a>
+    </div>
+    <div class="hero-number">01</div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Neo Trend Colección">
+  </div>
+</section>
 
-    <footer id="contacto" class="footer">
-        <p>© 2026 Neo Trend. Todos los derechos reservados.</p>
-    </footer>
+<!-- Sección catálogo -->
+<div class="section-header" id="catalogo">
+  <div class="section-title-group">
+    <div class="section-eyebrow">Nuestra selección</div>
+    <h2 class="section-title">Nueva Colección</h2>
+  </div>
+  <span class="section-count">2 productos</span>
+</div>
 
+<main class="catalogo">
+
+  <!-- Producto 1 — destacado (ocupa 2 columnas en desktop) -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <span class="badge">Destacado</span>
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Camiseta Essential">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20la%20Camiseta%20Essential%20%2415.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Camiseta Essential</h3>
+          <p class="producto-categoria">Ropa · Básicos</p>
+        </div>
+        <div class="producto-precio">$15.00</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Producto 2 -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?auto=format&fit=crop&w=500&q=80" alt="Zapatos Urban">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20los%20Zapatos%20Urban%20%2445.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Zapatos Urban</h3>
+          <p class="producto-categoria">Calzado · Urbano</p>
+        </div>
+        <div class="producto-precio">$45.00</div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<!-- Banner de confianza -->
+<section class="banner-medio" id="nosotros">
+  <div>
+    <h2>Moda <em>con</em><br>propósito real</h2>
+  </div>
+  <div>
+    <p style="margin-bottom:40px">En Neo Trend curadas cada pieza pensando en quién la va a usar. Calidad sin compromiso, estilo sin esfuerzo, atención directa y personal.</p>
+    <div class="banner-features">
+      <div class="feature">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">Envío rápido</div>
+        <div class="feature-desc">Entrega en tiempo récord a tu puerta</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">Atención directa</div>
+        <div class="feature-desc">Pedidos por WhatsApp, sin complicaciones</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <div class="feature-title">Calidad garantizada</div>
+        <div class="feature-desc">Solo las mejores piezas en nuestro catálogo</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Cambios fáciles</div>
+        <div class="feature-desc">Si no es tu talla, lo resolvemos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contacto">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-footer">Neo Trend</span>
+      <p>Tienda de moda online con atención personalizada. Encontrá tu estilo y pedí directo por WhatsApp.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tienda</h4>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="https://wa.me/50376719462" target="_blank">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <a href="https://wa.me/50376719462" target="_blank">WhatsApp</a>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Neo Trend. Todos los derechos reservados.</span>
+    <span>Hecho con ♥ en El Salvador</span>
+  </div>
+</footer>
+
+<script>
+  // Cursor personalizado
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  document.querySelectorAll('a, button, .producto-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+  });
+
+  // Wishlist toggle
+  function toggleWishlist(btn) {
+    btn.classList.toggle('liked');
+    const svg = btn.querySelector('svg');
+    // pequeña animación de pulso
+    btn.style.transform = 'scale(1.3)';
+    setTimeout(() => btn.style.transform = '', 200);
+  }
+
+  // Botón WhatsApp con mensaje personalizado por producto (ya incluido en href)
+</script>
 </body>
 </html>
