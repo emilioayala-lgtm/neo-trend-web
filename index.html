@@ -335,7 +335,10 @@
     }
 
     .producto-card:nth-child(2) { animation-delay: 0.1s; }
-    .producto-card:nth-child(3) { animation-delay: 0.2s; }
+    .producto-card:nth-child(3) { animation-delay: 0.15s; }
+    .producto-card:nth-child(4) { animation-delay: 0.2s; }
+    .producto-card:nth-child(5) { animation-delay: 0.25s; }
+    .producto-card:nth-child(6) { animation-delay: 0.3s; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -671,7 +674,7 @@
 </a>
 
 <!-- Barra de anuncio -->
-<div class="announcement">✦ Envío gratis en pedidos +$60 · Nueva colección disponible ✦</div>
+<div class="announcement">    ✦ Envío gratis en pedidos +$60 · Productos exclusivos para hombre ✦</div>
 
 <!-- Header -->
 <header class="header">
@@ -687,8 +690,8 @@
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Colección 2026</div>
-    <h1>Estilo<br>que <em>define</em><br>tu mundo</h1>
-    <p class="hero-desc">Piezas seleccionadas para quienes entienden que la moda no sigue tendencias — las crea.</p>
+    <h1>Para el<br>hombre <em>que</em><br>lo tiene todo.</h1>
+    <p class="hero-desc">Grooming, accesorios y herramientas seleccionadas para el hombre moderno que cuida cada detalle.</p>
     <div class="hero-actions">
       <a href="#catalogo" class="btn-primary">
         Ver colección
@@ -710,23 +713,23 @@
 <div class="section-header" id="catalogo">
   <div class="section-title-group">
     <div class="section-eyebrow">Nuestra selección</div>
-    <h2 class="section-title">Nueva Colección</h2>
+    <h2 class="section-title">Para Él</h2>
   </div>
-  <span class="section-count">2 productos</span>
+  <span class="section-count">6 productos</span>
 </div>
 
 <main class="catalogo">
 
-  <!-- Producto 1 — destacado (ocupa 2 columnas en desktop) -->
+  <!-- Producto 1 — DESTACADO (2 columnas) -->
   <article class="producto-card">
     <div class="producto-imagen">
-      <span class="badge">Destacado</span>
+      <span class="badge">Más vendido</span>
       <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Camiseta Essential">
+      <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80" alt="Kit de Afeitado Premium">
       <div class="producto-overlay">
-        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20la%20Camiseta%20Essential%20%2415.00" class="btn-overlay" target="_blank">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20el%20Kit%20de%20Afeitado%20Premium%20%2432.00" class="btn-overlay" target="_blank">
           Pedir por WhatsApp
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -735,10 +738,10 @@
     <div class="producto-info">
       <div class="producto-meta">
         <div>
-          <h3 class="producto-titulo">Camiseta Essential</h3>
-          <p class="producto-categoria">Ropa · Básicos</p>
+          <h3 class="producto-titulo">Kit de Afeitado Premium</h3>
+          <p class="producto-categoria">Cuidado Personal · Grooming</p>
         </div>
-        <div class="producto-precio">$15.00</div>
+        <div class="producto-precio">$32.00</div>
       </div>
     </div>
   </article>
@@ -749,9 +752,9 @@
       <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
-      <img src="https://images.unsplash.com/photo-1588099768531-a72d4a198538?auto=format&fit=crop&w=500&q=80" alt="Zapatos Urban">
+      <img src="https://images.unsplash.com/photo-1622015663319-e97e697503ee?auto=format&fit=crop&w=600&q=80" alt="Perfume Masculino Dark Wood">
       <div class="producto-overlay">
-        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20los%20Zapatos%20Urban%20%2445.00" class="btn-overlay" target="_blank">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20el%20Perfume%20Dark%20Wood%20%2455.00" class="btn-overlay" target="_blank">
           Pedir por WhatsApp
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -760,10 +763,114 @@
     <div class="producto-info">
       <div class="producto-meta">
         <div>
-          <h3 class="producto-titulo">Zapatos Urban</h3>
-          <p class="producto-categoria">Calzado · Urbano</p>
+          <h3 class="producto-titulo">Perfume Dark Wood</h3>
+          <p class="producto-categoria">Fragancia · Masculino</p>
         </div>
-        <div class="producto-precio">$45.00</div>
+        <div class="producto-precio">$55.00</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Producto 3 -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <span class="badge">Nuevo</span>
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Reloj Casual Clásico">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20el%20Reloj%20Casual%20Cl%C3%A1sico%20%2488.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Reloj Casual Clásico</h3>
+          <p class="producto-categoria">Accesorios · Relojes</p>
+        </div>
+        <div class="producto-precio">$88.00</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Producto 4 -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" alt="Mochila Táctica Urban">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20la%20Mochila%20T%C3%A1ctica%20Urban%20%2465.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Mochila Táctica Urban</h3>
+          <p class="producto-categoria">Bolsos · Everyday Carry</p>
+        </div>
+        <div class="producto-precio">$65.00</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Producto 5 -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22731c9b5b?auto=format&fit=crop&w=600&q=80" alt="Set Herramientas Multiusos">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20el%20Set%20de%20Herramientas%20Multiusos%20%2448.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Set de Herramientas Multiusos</h3>
+          <p class="producto-categoria">Herramientas · Hogar</p>
+        </div>
+        <div class="producto-precio">$48.00</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Producto 6 -->
+  <article class="producto-card">
+    <div class="producto-imagen">
+      <span class="badge">Oferta</span>
+      <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Guardar">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=600&q=80" alt="Set Skincare Masculino">
+      <div class="producto-overlay">
+        <a href="https://wa.me/50376719462?text=Hola%2C%20me%20interesa%20el%20Set%20Skincare%20Masculino%20%2428.00" class="btn-overlay" target="_blank">
+          Pedir por WhatsApp
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="producto-info">
+      <div class="producto-meta">
+        <div>
+          <h3 class="producto-titulo">Set Skincare Masculino</h3>
+          <p class="producto-categoria">Cuidado Personal · Piel</p>
+        </div>
+        <div class="producto-precio">
+          <span class="precio-original">$38.00</span>$28.00
+        </div>
       </div>
     </div>
   </article>
@@ -773,10 +880,10 @@
 <!-- Banner de confianza -->
 <section class="banner-medio" id="nosotros">
   <div>
-    <h2>Moda <em>con</em><br>propósito real</h2>
+    <h2>Todo lo que<br>un hombre <em>real</em><br>necesita</h2>
   </div>
   <div>
-    <p style="margin-bottom:40px">En Neo Trend curadas cada pieza pensando en quién la va a usar. Calidad sin compromiso, estilo sin esfuerzo, atención directa y personal.</p>
+    <p style="margin-bottom:40px">En Neo Trend encontrarás desde grooming de alto nivel hasta herramientas para el día a día. Productos pensados para hombres que se cuidan, se equipan y van siempre al frente.</p>
     <div class="banner-features">
       <div class="feature">
         <div class="feature-icon">🚀</div>
